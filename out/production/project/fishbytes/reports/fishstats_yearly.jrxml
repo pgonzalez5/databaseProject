@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-12-02T23:42:19 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bait" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="479"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="521"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="REPORT_TITLE" class="java.lang.String"/>
+	<parameter name="REPORT_YEAR" class="java.lang.Integer"/>
+	<parameter name="IMAGE" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT DISTINCT * FROM (SELECT FSUBID FROM LPER_PGON_CATCH C WHERE extract(year FROM C.PDATE) = $P{REPORT_YEAR}) natural join
+		LPER_PGON_FSPEC natural join LPER_PGON_FSUBSPEC natural join (SELECT "LPER_PGON_VIEW_BAIT_AVG"."FSUBNAME",
+	"LPER_PGON_VIEW_BAIT_AVG"."AVGWEIGHT",
+	"LPER_PGON_VIEW_BAIT_AVG"."AVGLENGTH"
+FROM "LPER_PGON_VIEW_BAIT_AVG")]]>
+	</queryString>
+	<field name="FSUBNAME" class="java.lang.String"/>
+	<field name="FSPECID" class="java.math.BigDecimal"/>
+	<field name="FSNAME" class="java.lang.String"/>
+	<field name="FSUBID" class="java.math.BigDecimal"/>
+	<field name="AVGWEIGHT" class="java.math.BigDecimal"/>
+	<field name="AVGLENGTH" class="java.math.BigDecimal"/>
+	<variable name="FSNAME1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{FSNAME}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="142" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="559" height="95" backcolor="#417A76" uuid="6c6ca4e1-17cd-4913-93d6-5e670ea9ae8a"/>
+				<staticText>
+					<reportElement style="Title" x="20" y="14" width="370" height="66" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Fishing Bytes]]></text>
+				</staticText>
+				<image>
+					<reportElement x="400" y="7" width="81" height="80" uuid="8bf99c6f-903c-4cd7-b0bb-8e17c01a452a"/>
+					<imageExpression><![CDATA[$P{IMAGE}]]></imageExpression>
+				</image>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="100" width="460" height="32" forecolor="#000000" backcolor="#CC0000" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="307" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
+					<textElement textAlignment="Right">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="20" y="1" width="210" height="30" forecolor="#FFFFFF" uuid="0214abd7-cf25-42da-af32-b629f47145c6"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{REPORT_TITLE}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-2" y="2" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="a0fc2511-32b8-48fd-87a2-31350301af38"/>
+				<staticText>
+					<reportElement x="155" y="0" width="86" height="24" forecolor="#FFFFFF" uuid="f5f9b9df-9895-4e01-997d-6f4c1b219c6c"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Fish Subspecies]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="22" y="-1" width="86" height="24" forecolor="#FFFFFF" uuid="75c92a73-a72b-4530-85db-4aa562af1030"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Fish Species]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement x="400" y="0" width="120" height="26" forecolor="#FFFFFF" uuid="578ae4f3-e869-415a-b77b-cc5cad069bcb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Average Length (inches)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="272" y="0" width="100" height="26" forecolor="#FFFFFF" uuid="ee10e367-ff31-4ed1-ac8d-1d148f118f15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Average Weight (LB)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="b50221b5-8254-440b-8c6f-1f0b138c9259"/>
+				<textField>
+					<reportElement x="150" y="0" width="100" height="30" uuid="8f7900d9-76ba-46ea-92e1-f7ab0f3a38da"/>
+					<textFieldExpression><![CDATA[$F{FSUBNAME}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="271" y="0" width="100" height="30" uuid="71ba8919-0f08-4416-8074-7bda7a3f6ed7"/>
+					<textFieldExpression><![CDATA[$F{AVGWEIGHT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="399" y="0" width="100" height="30" uuid="30a5d250-80d3-4bb9-99ea-a3bfa7ba5051"/>
+					<textFieldExpression><![CDATA[$F{AVGLENGTH}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="20" y="0" width="100" height="18" uuid="dea864ed-34ac-4545-9737-a49e0693c797"/>
+					<textFieldExpression><![CDATA[$F{FSNAME}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="49" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="13" y="9" width="156" height="30" uuid="010778cc-dc1b-4e65-8160-1b8d63519281"/>
+				<textFieldExpression><![CDATA["Number of rows "+$V{FSNAME1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="729c3539-f946-4d0e-a0a7-bda2815ea1b0"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="4834e99c-7f6c-485a-b098-50e5187f2ab4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="9825b46e-76f1-469a-abb8-a1cc27aad685"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="137d38c7-1a83-4fc5-b156-9d5f1b1a0ddc"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
